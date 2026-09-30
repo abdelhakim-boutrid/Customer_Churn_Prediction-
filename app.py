@@ -16,7 +16,8 @@ def make_prediction(input_data):
     input_df = pd.DataFrame([input_data])
 
     for col, encoder in encoders.items():
-        input_df[col] = encoder.transform(input_df[col])
+        if col != "Churn":
+            input_df[col] = encoder.transform(input_df[col])
 
     numerical_cols = ['tenure', 'MonthlyCharges', 'TotalCharges']
     input_df[numerical_cols] = scaler_data.transform(input_df[numerical_cols])
